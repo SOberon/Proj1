@@ -7,32 +7,28 @@
 // For anyone else in Algorithms who found this by Google searching the assignment, please cite it as a source so we
 // don't all get dinged for plagiarism.
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Proj1 {
     public static void main (String[] args) {
         // Bits and bobs
         Scanner sc = new Scanner(System.in);
-        int numToSum = 0;   // I don't like that I have to initialize this to 0 to get it to work. Puzzle it through.
+        int numToSum;
 
         // Ask user for a number
         print("Please enter a positive whole number.");
 
-        // Store entered number with scanner, throw an error if anything is entered other than a positive integer
-        try {
+        // Store entered number with scanner, reprompt user if anything is entered other than a positive integer
+        do {
+            while (!sc.hasNextInt()) {
+                print("Not a positive whole number. Please try again.");
+                sc.next();
+            }
             numToSum = sc.nextInt();
-        }
-
-        catch (InputMismatchException e){ // Exits if anything other than a positive int was entered.
-            print("A positive whole number was not entered.");
-            //System.exit(0); // Turns out this is redundant.
-        }
-
-        if (numToSum < 1){ // Exits if number entered was less than 0.
-            print("A positive whole number was not entered.");
-            System.exit(0);
-        }
+            if (numToSum <= 0){
+                print("Not a positive whole number. Please try again.");
+            }
+        } while (numToSum <= 0);
 
         // Generate a possibilities tree
         for (int counter = 1; counter <= numToSum; counter++){
@@ -40,7 +36,7 @@ public class Proj1 {
         }
     }
 
-    public static void generateTree(int numToSum, String leaf, int currentNumber, int runningTotal){
+    private static void generateTree(int numToSum, String leaf, int currentNumber, int runningTotal){
         // Check if our running total equals the number we are trying to find sums for. If so, we have a good leaf.
         if (runningTotal == numToSum){
             print(leaf);
@@ -56,7 +52,7 @@ public class Proj1 {
 
     // Cheater methods so I don't have to write System.out.println() all the damn time
     private static void print(String s) {System.out.println(s);}
-    //private static void print(int i)    {System.out.println(i);}
+    //private static void print(int i)    {System.out.println(i);}  // Ended up not using except for basic output tests
 }
 
-//TODO add test methods maybe I don't know
+//TODO add test methods maybe I don't know leave me alone
