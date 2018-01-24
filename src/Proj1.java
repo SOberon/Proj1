@@ -24,6 +24,8 @@ public class Proj1 {
         System.out.println("Please enter a positive integer");
         //TODO Add exception handling for user entry of a char, negative number, float, empty, null, etc...
         number = sc.nextInt();
+
+        return number;
     }
 
     public static void sumsToN(int number)
