@@ -7,46 +7,52 @@
 // For anyone else in Algorithms who found this by Google searching the assignment, please cite it as a source so we
 // don't all get dinged for plagiarism.
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Proj1 {
 
-    public static void main(String[] args){
-        int number = userPicksAnInt();		//User picks a number
-        sumsToN(number);						//Tree is generated and printed
+    private static void print(String s){
+        // Cheater method so I don't have to write System.out.println() all the damn time
+        System.out.println(s);
     }
 
-    public static int userPicksAnInt(){
-        Scanner sc = new Scanner(System.in); 	//Scanner for user entry
-        int number;					//Number to be parsed or whatever the correct word is
+    public static void main(String[] args) {
+        // Variables
+        Scanner sc = new Scanner(System.in);
+        int numToSum = 0;
 
-        //Ask the user to input a number
-        System.out.println("Please enter a positive integer");
-        //TODO Add exception handling for user entry of a char, negative number, float, empty, null, etc...
-        number = sc.nextInt();
+        // Ask user for a number
+        print("Please enter a positive whole number.");
 
-        return number;
-    }
-
-    public static void sumsToN(int number)
-    {
-        if(number == 1) //Base cases are good, but probably don't need them if the recursion works properly
-        {
-            System.out.print("1");
-
-        } else {
-
-            for(int i = 1; i < number; i++)
-            {
-
-                System.out.print(i + " + ");
-                sumsToN(number - i);
-                System.out.print("   ");
-            }
-
+        // Store entered number with scanner, throw an error if anything is entered other than a positive integer
+        try {
+            numToSum = sc.nextInt();
         }
+
+        catch (InputMismatchException e){
+            print("A positive whole number was not entered.");
+        }
+
+        // Throw error if anything other than a positive integer
+        // Generate a possibilities tree
+            // Set stringToPrint to "1"
+            // Start with i = 1, j = 1
+            // Add i to j
+                // if i + j < n, concatenate " + i" to stringToPrint
+                    // increment i
+
+                // if i + j = n, that is a valid leaf, print it
+                    // increment i
+                    // if i = n, that is a valid leaf, print it
+                    // if i > n, prune that branch
+
+                // if i + j > n, prune that branch
+                    // increment i
+                    // if i = n, that is a valid leaf, print it
+                    // if i > n, prune that branch
+
 
     }
 
 }
-//TODO Write unit tests. Maybe.
