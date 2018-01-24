@@ -55,4 +55,4 @@ public class Proj1 {
     //private static void print(int i)    {System.out.println(i);}  // Ended up not using except for basic output tests
 }
 
-//TODO add test methods maybe I don't know leave me alone
+//TODO add test methods classes I don't know leave me alone
