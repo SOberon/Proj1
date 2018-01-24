@@ -11,16 +11,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Proj1 {
-
-    private static void print(String s){
-        // Cheater method so I don't have to write System.out.println() all the damn time
-        System.out.println(s);
-    }
-
-    public static void main(String[] args) {
-        // Variables
+    public static void main (String[] args) {
+        // Bits and bobs
         Scanner sc = new Scanner(System.in);
-        int numToSum = 0;
+        int numToSum = 0;   // I don't like that I have to initialize this to 0 to get it to work. Puzzle it through.
 
         // Ask user for a number
         print("Please enter a positive whole number.");
@@ -30,29 +24,39 @@ public class Proj1 {
             numToSum = sc.nextInt();
         }
 
-        catch (InputMismatchException e){
+        catch (InputMismatchException e){ // Exits if anything other than a positive int was entered.
             print("A positive whole number was not entered.");
+            //System.exit(0); // Turns out this is redundant.
         }
 
-        // Throw error if anything other than a positive integer
+        if (numToSum < 1){ // Exits if number entered was less than 0.
+            print("A positive whole number was not entered.");
+            System.exit(0);
+        }
+
         // Generate a possibilities tree
-            // Set stringToPrint to "1"
-            // Start with i = 1, j = 1
-            // Add i to j
-                // if i + j < n, concatenate " + i" to stringToPrint
-                    // increment i
-
-                // if i + j = n, that is a valid leaf, print it
-                    // increment i
-                    // if i = n, that is a valid leaf, print it
-                    // if i > n, prune that branch
-
-                // if i + j > n, prune that branch
-                    // increment i
-                    // if i = n, that is a valid leaf, print it
-                    // if i > n, prune that branch
-
-
+        for (int counter = 1; counter < numToSum; counter++){
+            generateTree(numToSum, "" + counter, counter, counter);
+        }
     }
 
+    public static void generateTree(int numToSum, String leaf, int currentNumber, int runningTotal){
+        // Check if our running total equals the number we are trying to find sums for. If so, we have a good leaf.
+        if (runningTotal == numToSum){
+            print(leaf);
+        }
+
+        // Keep generating branches, prune branches if they go over the number we are trying to find sums for
+        else if (runningTotal < numToSum){
+            for (int counter = currentNumber; counter < numToSum; counter++){
+                generateTree(numToSum, leaf + " + " + counter, counter, runningTotal + counter);
+            }
+        }
+    }
+
+    // Cheater methods so I don't have to write System.out.println() all the damn time
+    private static void print(String s) {System.out.println(s);}
+    //private static void print(int i)    {System.out.println(i);}
 }
+
+//TODO add test methods maybe I don't know
