@@ -35,7 +35,7 @@ public class Proj1 {
         }
 
         // Generate a possibilities tree
-        for (int counter = 1; counter < numToSum; counter++){
+        for (int counter = 1; counter <= numToSum; counter++){
             generateTree(numToSum, "" + counter, counter, counter);
         }
     }
